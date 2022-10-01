@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"fmt"
+	"flag"
 	"strings"
 
 	logger "github.com/kubescape/go-logger"
@@ -20,6 +21,7 @@ import (
 	"github.com/kubescape/kubescape/v2/core/meta"
 
 	"github.com/spf13/cobra"
+	"github.com/spf13/pflag"
 )
 
 var rootInfo cautils.RootInfo
@@ -65,6 +67,8 @@ func getRootCmd(ks meta.IKubescape) *cobra.Command {
 	rootCmd.PersistentFlags().BoolVarP(&rootInfo.DisableColor, "disable-color", "", false, "Disable Color output for logging")
 	rootCmd.PersistentFlags().BoolVarP(&rootInfo.EnableColor, "enable-color", "", false, "Force enable Color output for logging")
 
+	// Retrieve --kubeconfig flag from https://github.com/kubernetes/kubectl/blob/master/pkg/cmd/cmd.go
+	pflag.CommandLine.AddGoFlagSet(flag.CommandLine)
 	cobra.OnInitialize(initLogger, initLoggerLevel, initEnvironment, initCacheDir)
 
 	// Supported commands
