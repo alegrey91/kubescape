@@ -87,6 +87,7 @@ func GetScanCommand(ks meta.IKubescape) *cobra.Command {
 	scanCmd.PersistentFlags().StringVar(&scanInfo.HostSensorYamlPath, "host-scan-yaml", "", "Override default host scanner DaemonSet. Use this flag cautiously")
 	scanCmd.PersistentFlags().StringVar(&scanInfo.FormatVersion, "format-version", "v1", "Output object can be different between versions, this is for maintaining backward and forward compatibility. Supported:'v1'/'v2'")
 	scanCmd.PersistentFlags().StringVar(&scanInfo.CustomClusterName, "cluster-name", "", "Set the custom name of the cluster. Not same as the kube-context flag")
+	scanCmd.PersistentFlags().StringVar(&scanInfo.KubeConfig, "kubeconfig", "", "Set other kubeconfig files by setting the KUBECONFIG environment variable")
 
 	// Deprecated flags - remove 1.May.2022
 	scanCmd.PersistentFlags().BoolVarP(&scanInfo.Silent, "silent", "s", false, "Silent progress messages")
